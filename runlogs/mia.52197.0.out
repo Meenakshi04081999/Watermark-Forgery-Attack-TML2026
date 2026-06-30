@@ -1,0 +1,38 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.1.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Dataset already extracted.
+Building forgery submission...
+Processing WM_1 dataset -> Forging onto images 1.png to 25.png ...
+  [Warning] No source images found in watermarked_sources/WM_1
+Processing WM_2 dataset -> Forging onto images 26.png to 50.png ...
+  [Warning] No source images found in watermarked_sources/WM_2
+Processing WM_3 dataset -> Forging onto images 51.png to 75.png ...
+  [Warning] No source images found in watermarked_sources/WM_3
+Processing WM_4 dataset -> Forging onto images 76.png to 100.png ...
+  [Warning] No source images found in watermarked_sources/WM_4
+Processing WM_5 dataset -> Forging onto images 101.png to 125.png ...
+  [Warning] No source images found in watermarked_sources/WM_5
+Processing WM_6 dataset -> Forging onto images 126.png to 150.png ...
+  [Warning] No source images found in watermarked_sources/WM_6
+Processing WM_7 dataset -> Forging onto images 151.png to 175.png ...
+  [Warning] No source images found in watermarked_sources/WM_7
+Processing WM_8 dataset -> Forging onto images 176.png to 200.png ...
+  [Warning] No source images found in watermarked_sources/WM_8
+
+Successfully forged 0 images.
+[WARNING] Expected 200 images, but processed 0. Your submission may be rejected!
+Packaging images into submission.zip...
+Saved submission file to submission.zip

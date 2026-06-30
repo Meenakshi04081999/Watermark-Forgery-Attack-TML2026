@@ -1,0 +1,27 @@
+# Ignore log-like files
+*.log
+*.err
+*.out
+
+# Ignore compressed archives
+*.zip
+*.tar
+*.gz
+*.bz2
+*.7z
+
+# Ignore runlogs folder
+runlogs/
+
+# Ignore temporary or cache files
+*.tmp
+*.cache
+*.bak
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+
+# Ignore OS-specific junk
+.DS_Store
+Thumbs.db

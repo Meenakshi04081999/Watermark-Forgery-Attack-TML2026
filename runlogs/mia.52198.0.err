@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/home/atml_team032/watermarking/task_template.py", line 37, in <module>
+    raise FileNotFoundError(f"Could not find {ZIP_FILE}. Please download the dataset first.")
+FileNotFoundError: Could not find Dataset.zip. Please download the dataset first.

@@ -1,0 +1,40 @@
+000 (52391.000.000) 2026-06-30 23:30:01 Job submitted from host: <10.143.248.61:9618?addrs=10.143.248.61-9618&alias=conduit2.hpc.uni-saarland.de&noUDP&sock=schedd_423091_d032>
+...
+040 (52391.000.000) 2026-06-30 23:30:13 Finished transferring input files
+...
+001 (52391.000.000) 2026-06-30 23:30:14 Job executing on host: <10.143.248.15:9618?PrivAddr=%3c10.143.250.15:9618%3fsock%3dstartd_2204_56d2%3e&PrivNet=cs-hpc-storage&addrs=10.143.248.15-9618&alias=thera.hpc.uni-saarland.de&noUDP&sock=startd_2204_56d2>
+	SlotName: teaching7@thera.hpc.uni-saarland.de
+	AvailableGPUs = { GPUs_GPU_e4a4d2cd }
+	CondorScratchDir = "/raid/condor/lib/condor/execute/dir_2713690"
+	Cpus = 7
+	Disk = 414954411
+	GPUs = 1
+	GPUs_GPU_e4a4d2cd = [ Id = "GPU-e4a4d2cd"; Capability = 6.0; DeviceName = "Tesla P100-SXM2-16GB"; DeviceUuid = "e4a4d2cd-7add-b90a-0584-797a8aaa4b43"; ECCEnabled = true; NvidiaDriver = "550.163.01"; DriverVersion = 12.4; DevicePciBusId = "0000:89:00.0"; GlobalMemoryMb = 16269; MaxSupportedVersion = 12040 ]
+	Memory = 96737
+...
+006 (52391.000.000) 2026-06-30 23:30:18 Image size of job updated: 33
+	33  -  MemoryUsage of job (MB)
+	33828  -  ResidentSetSize of job (KB)
+...
+040 (52391.000.000) 2026-06-30 23:30:18 Started transferring output files
+...
+040 (52391.000.000) 2026-06-30 23:30:18 Finished transferring output files
+...
+005 (52391.000.000) 2026-06-30 23:30:18 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	2090  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	2090  -  Total Bytes Sent By Job
+	0  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated Assigned
+	   Cpus                 :        0        1         7 
+	   Disk (KB)            :       23        0 414954411 
+	   GPUs                 :                 1         1 "GPU-e4a4d2cd"
+	   Memory (MB)          :       33     4096     96737 
+	   TimeExecute (s)      :        4                    
+	   TimeSlotBusy (s)     :        5                    
+...
