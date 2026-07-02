@@ -9,15 +9,15 @@ from PIL import Image
 
 # CONFIG
 ZIP_FILE = "Dataset.zip"  # Path to the downloaded dataset zip
-DATASET_DIR = Path(".")
+DATASET_DIR = Path("/home/atml_team032/watermarking")
 print("Current working dir:", os.getcwd())
 print("Contents:", os.listdir("."))
 print("WM_1 exists:", os.path.exists("watermarked_sources/WM_1"))
 if os.path.exists("watermarked_sources/WM_1"):
     print("WM_1 contents:", os.listdir("watermarked_sources/WM_1"))# Unzipped folder
-TEMP_OUT_DIR = Path("submission_temp")  # Temporary folder for forged images
-FILE_PATH = "submission.zip"  # Final file to upload
-ALPHA = 1.0
+TEMP_OUT_DIR = Path("/home/atml_team032/watermarking/submission_temp")  # Temporary folder for forged images
+FILE_PATH = "/home/atml_team032/watermarking/submission.zip"  # Final file to upload
+ALPHA = 2.0 # Strength of forgery ; watermark too weak then increase alpha, image quality too low then decrease alpha
 
 # Leaderboard submission
 BASE_URL  = "http://34.63.153.158"
@@ -43,7 +43,7 @@ print("Dataset already extracted.")
 TEMP_OUT_DIR.mkdir(exist_ok=True)
 total_processed = 0
  
-# ── Step 2: Average Residual Copy Attack ─────────────────────────────────────
+# Step 2: Average Residual Copy Attack 
 print("\nBuilding forgery submission...")
  
 for source_wm, target_start, target_stop in CATEGORIES:
@@ -94,14 +94,14 @@ print(f"\nSuccessfully forged {total_processed} images.")
 if total_processed != 200:
     print(f"[WARNING] Expected 200, got {total_processed}. Submission may be rejected!")
  
-# ── Step 3: Package into flat zip ────────────────────────────────────────────
+# Step 3: Package into flat zip 
 print(f"Packaging into {FILE_PATH}...")
 with zipfile.ZipFile(FILE_PATH, "w", zipfile.ZIP_DEFLATED) as zipf:
     for img_path in sorted(TEMP_OUT_DIR.glob("*.png")):
         zipf.write(img_path, arcname=img_path.name)
 print(f"Saved submission to {FILE_PATH}")
  
-# ── Step 4: Submit ────────────────────────────────────────────────────────────
+#  Step 4: Submit 
 if SUBMIT:
     if not os.path.isfile(FILE_PATH):
         print(f"File not found: {FILE_PATH}", file=sys.stderr)
