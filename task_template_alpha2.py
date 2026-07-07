@@ -9,21 +9,19 @@ from PIL import Image
 
 # CONFIG
 ZIP_FILE = "Dataset.zip"  # Path to the downloaded dataset zip
-DATASET_DIR = Path(".")
+DATASET_DIR = Path("/home/atml_team032/watermarking")
 print("Current working dir:", os.getcwd())
 print("Contents:", os.listdir("."))
 print("WM_1 exists:", os.path.exists("watermarked_sources/WM_1"))
 if os.path.exists("watermarked_sources/WM_1"):
     print("WM_1 contents:", os.listdir("watermarked_sources/WM_1"))# Unzipped folder
-TEMP_OUT_DIR = Path("submission_temp")  # Temporary folder for forged images
-FILE_PATH = "submission.zip"  # Final file to upload
-ALPHA = 2.0
-
-HIGHPASS_RADIUS = 3  # box-blur radius for high-pass; set to 0 to disable
+TEMP_OUT_DIR = Path("/home/atml_team032/watermarking/submission_temp")  # Temporary folder for forged images
+FILE_PATH = "/home/atml_team032/watermarking/submission.zip"  # Final file to upload
+ALPHA = 2.0 # Strength of forgery ; watermark too weak then increase alpha, image quality too low then decrease alpha
 
 # Leaderboard submission
 BASE_URL  = "http://34.63.153.158"
-API_KEY  = "something"  # REPLACE WITH YOUR API KEY
+API_KEY  = "c624f3b8d663751fcf05c23893ab116a"  # REPLACE WITH YOUR API KEY
 TASK_ID   = "22-forging-task"
 SUBMIT   = True  # Set to True to enable submission
 
@@ -37,20 +35,7 @@ CATEGORIES = [
     ("WM_7",  151, 175),
     ("WM_8",  176, 200),
 ]
-
-# ── High-pass helper (pure NumPy, no scipy) ──────────────────────────────────
-def box_blur(img, radius=3):
-    """Separable box blur via cumulative sums. img: HxWx3 float array."""
-    if radius <= 0:
-        return img
-    k = 2 * radius + 1
-    pad = np.pad(img, ((radius + 1, radius), (radius + 1, radius), (0, 0)), mode="edge")
-    cs = np.cumsum(pad, axis=0)
-    out = (cs[k:, :, :] - cs[:-k, :, :]) / k
-    cs = np.cumsum(out, axis=1)
-    out = (cs[:, k:, :] - cs[:, :-k, :]) / k
-    return out
-
+ 
 # ── Step 1: Unzip dataset if needed ──────────────────────────────────────────
 print("Dataset already extracted.")
 
@@ -58,7 +43,7 @@ print("Dataset already extracted.")
 TEMP_OUT_DIR.mkdir(exist_ok=True)
 total_processed = 0
  
-# ── Step 2: Average Residual Copy Attack ─────────────────────────────────────
+# Step 2: Average Residual Copy Attack 
 print("\nBuilding forgery submission...")
  
 for source_wm, target_start, target_stop in CATEGORIES:
@@ -72,12 +57,12 @@ for source_wm, target_start, target_stop in CATEGORIES:
         print(f"  [Warning] No source images found in {source_dir}")
         continue
  
-    # Compute MEDIAN of watermarked source images (robust to unusual content)
+    # Compute mean of watermarked source images
     wm_arrays = []
     for p in source_images:
         arr = np.array(Image.open(p).convert("RGB")).astype(np.float32)
         wm_arrays.append(arr)
-    median_wm = np.median(wm_arrays, axis=0)
+    mean_wm = np.mean(wm_arrays, axis=0)
  
     # Compute mean of clean target images for this batch
     clean_arrays = []
@@ -87,12 +72,8 @@ for source_wm, target_start, target_stop in CATEGORIES:
         clean_arrays.append(arr)
     mean_clean = np.mean(clean_arrays, axis=0)
  
-    # Watermark residual = median(watermarked) - mean(clean)
-    watermark_residual = median_wm - mean_clean
- 
-    # High-pass: remove low-frequency content bias, keep the watermark
-    if HIGHPASS_RADIUS:
-        watermark_residual = watermark_residual - box_blur(watermark_residual, HIGHPASS_RADIUS)
+    # Watermark residual = mean(watermarked) - mean(clean)
+    watermark_residual = mean_wm - mean_clean
  
     # Apply watermark residual to each target image
     for number in range(target_start, target_stop + 1):
@@ -113,14 +94,14 @@ print(f"\nSuccessfully forged {total_processed} images.")
 if total_processed != 200:
     print(f"[WARNING] Expected 200, got {total_processed}. Submission may be rejected!")
  
-# ── Step 3: Package into flat zip ────────────────────────────────────────────
+# Step 3: Package into flat zip 
 print(f"Packaging into {FILE_PATH}...")
 with zipfile.ZipFile(FILE_PATH, "w", zipfile.ZIP_DEFLATED) as zipf:
     for img_path in sorted(TEMP_OUT_DIR.glob("*.png")):
         zipf.write(img_path, arcname=img_path.name)
 print(f"Saved submission to {FILE_PATH}")
  
-# ── Step 4: Submit ────────────────────────────────────────────────────────────
+#  Step 4: Submit 
 if SUBMIT:
     if not os.path.isfile(FILE_PATH):
         print(f"File not found: {FILE_PATH}", file=sys.stderr)
@@ -153,3 +134,4 @@ if SUBMIT:
             try:    print("Server response:", detail.json())
             except: print("Server response:", detail.text)
         sys.exit(1)
+ 

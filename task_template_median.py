@@ -23,7 +23,7 @@ HIGHPASS_RADIUS = 3  # box-blur radius for high-pass; set to 0 to disable
 
 # Leaderboard submission
 BASE_URL  = "http://34.63.153.158"
-API_KEY  = "something"  # REPLACE WITH YOUR API KEY
+API_KEY  = "c624f3b8d663751fcf05c23893ab116a"  # REPLACE WITH YOUR API KEY
 TASK_ID   = "22-forging-task"
 SUBMIT   = True  # Set to True to enable submission
 
