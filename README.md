@@ -10,11 +10,13 @@ pip install -r requirements.txt
 
 The script uses relative paths, so it must sit alongside the data:
 
+```
 ./
 ├── task_template_alpha2.py
 ├── clean_targets/            # 1.png ... 200.png
 └── watermarked_sources/
-└── WM_1/ ... WM_8/        # 25 images each
+    └── WM_1/ ... WM_8/        # 25 images each
+```
 
 ## 3. Set your API key
 
