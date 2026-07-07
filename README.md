@@ -20,7 +20,7 @@ The script uses relative paths, so it must sit alongside the data:
 
 ## 3. Set your API key
 
-In `task_template_alpha2.py`, set `API_KEY` to your leaderboard key.
+In `task_template_alpha1.py`, set `API_KEY` to your leaderboard key.
 
 ## 4. Run
 
